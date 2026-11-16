@@ -4,7 +4,9 @@
 > **Status:** Prototype complete · all 17 test cases pass · pilot designed<br>
 > **Stack:** Claude (structured JSON) · Gmail (read-only) · Google Sheets (state)
 
-**▶ Try it:** download [`prototype/index.html`](prototype/index.html) and open it in a browser. It runs offline on fictional sample data.
+**▶ Try it live:** [lakshmiprasanna93.github.io/foldline/prototype](https://lakshmiprasanna93.github.io/foldline/prototype/) (runs in the browser on fictional sample data)
+
+> **Prototype, not production.** Gmail, Claude and Google Sheets are simulated by a rules engine. The 17 test cases validate the product logic and safety boundaries; LLM quality is measured in the pilot (section 7).
 
 ## TL;DR
 - Senior PMs follow ~20 sources but have only 10–20 minutes of reading time.
@@ -12,7 +14,7 @@
 - It returns up to 10 source-linked insight cards that fit a 15-minute commute.
 - The agent never writes to Gmail. The user makes every keep/drop decision.
 
-## Results (prototype)
+## Prototype results
 | Group | Cases | Result |
 |---|---|---|
 | Happy path | 3 (show & save, change topic, feedback changes scores) | ✅ Pass |
