@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Foldline · prototype (sample data)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Single-column reading feed (newsletter-digest app). The sample-data banner is permanent
+   and honest about what is and isn't connected. All data is fictional. */
+:root{
+  --font-display:"Fraunces",Georgia,serif;
+  --font-body:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,monospace;
+  --bg:#f6f3ec; --surface:#ffffff; --surface-2:#eef0e6; --border:#dcd6c6;
+  --fg:#1a241d; --fg-muted:#5b655b; --fg-faint:#8d9388;
+  --accent:#1f4d3a; --accent-fg:#f6f3ec; --accent-soft:#dfe9e0;
+  --topic-a:#2f6f4f; --topic-a-bg:#e4efe6;
+  --topic-b:#8a5a2b; --topic-b-bg:#f2e9dc;
+  --topic-c:#30587e; --topic-c-bg:#e3eaf1;
+  --topic-d:#7a3b6b; --topic-d-bg:#f0e4ec;
+  --warn:#9a5b12; --warn-bg:#f5e9d8;
+  --danger:#9c2f2f; --danger-bg:#f6e3e2;
+  --shadow: 0 1px 2px rgba(26,36,29,.06), 0 8px 24px -16px rgba(26,36,29,.25);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#141811; --surface:#1c211b; --surface-2:#232a20; --border:#333b2f;
+    --fg:#eceee7; --fg-muted:#a9b2a3; --fg-faint:#7b8277;
+    --accent:#7fb89a; --accent-fg:#101511; --accent-soft:#223229;
+    --topic-a:#7fb89a; --topic-a-bg:#1f2e23;
+    --topic-b:#d9a56a; --topic-b-bg:#2e2619;
+    --topic-c:#8db4dd; --topic-c-bg:#1e2733;
+    --topic-d:#d59bc4; --topic-d-bg:#2c2029;
+    --warn:#e0ad63; --warn-bg:#2e2619;
+    --danger:#e2908c; --danger-bg:#33201f;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.6);
+    color-scheme: dark;
+  }
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--fg); font:14px var(--font-body);
+  padding:0 max(16px, env(safe-area-inset-right,0px)) 40px max(16px, env(safe-area-inset-left,0px));
+}
+h1,h2,h3{font-family:var(--font-display); text-wrap:balance; margin:0}
+p{margin:0}
+.wrap{max-width:860px;margin:0 auto}
+.appbar{
+  position:sticky; top:0; z-index:10; background:var(--accent); color:var(--accent-fg);
+  margin:0 -16px; padding:14px 16px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:600;font-size:1.25rem}
+.brand .mark{width:28px;height:28px;border-radius:7px;background:var(--accent-fg);color:var(--accent);display:grid;place-items:center;font-family:var(--font-body);font-weight:700;font-size:.9rem}
+.appbar .spacer{flex:1}
+.runtoggle{display:flex;background:rgba(246,243,236,.14);border-radius:999px;padding:3px;gap:2px}
+.runtoggle button{border:0;background:transparent;color:var(--accent-fg);opacity:.72;font:inherit;font-weight:600;font-size:.82rem;padding:7px 14px;border-radius:999px;cursor:pointer}
+.runtoggle button[aria-pressed="true"]{background:var(--accent-fg);color:var(--accent);opacity:1}
+.samplepill{display:flex;align-items:center;gap:6px;font-size:.76rem;font-weight:600;color:var(--accent-fg);background:rgba(246,243,236,.14);padding:6px 11px;border-radius:999px;white-space:nowrap}
+.samplepill .dot{width:6px;height:6px;border-radius:50%;background:#e0ad63}
+.status{padding-top:22px; display:flex; flex-direction:column; gap:14px}
+.status-row{display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap}
+.eyebrow{font-size:.74rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--fg-muted)}
+.status h1{font-size:1.7rem; font-weight:600; margin-top:4px}
+.recon{display:flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:.78rem; color:var(--fg-muted); background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:9px 13px; font-variant-numeric:tabular-nums}
+.recon b{color:var(--fg); font-weight:600}
+.counts{display:flex; gap:6px; flex-wrap:wrap; font-size:.78rem; color:var(--fg-muted)}
+.chip{background:var(--surface-2); border:1px solid var(--border); border-radius:999px; padding:4px 10px; display:flex; gap:5px; align-items:center}
+.chip b{color:var(--fg)}
+.feed{display:flex;flex-direction:column;gap:14px;margin-top:22px}
+.card{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:18px 20px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:10px}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.topic-pill{font-size:.72rem;font-weight:700;letter-spacing:.03em;padding:4px 10px;border-radius:999px}
+.topic-pill.A{color:var(--topic-a);background:var(--topic-a-bg)}
+.topic-pill.B{color:var(--topic-b);background:var(--topic-b-bg)}
+.topic-pill.C{color:var(--topic-c);background:var(--topic-c-bg)}
+.topic-pill.D{color:var(--topic-d);background:var(--topic-d-bg)}
+.whatsnew{font-size:.72rem;color:var(--fg-muted);font-weight:500;display:flex;align-items:center;gap:5px}
+.whatsnew::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--fg-faint)}
+.headline{font-family:var(--font-display);font-size:1.22rem;font-weight:600;line-height:1.32}
+.why{color:var(--fg-muted);font-size:.93rem;line-height:1.5;max-width:65ch}
+.card-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:2px}
+.sources{font-size:.8rem;color:var(--fg-faint);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.sources .plusn{color:var(--fg-muted);font-weight:600}
+.score{font-family:var(--font-mono);font-size:.74rem;color:var(--fg-muted)}
+.score.up{color:var(--topic-a)}
+.score.down{color:var(--warn)}
+.actions{display:flex;gap:6px;flex-wrap:wrap}
+.actbtn{font:inherit; font-size:.8rem; font-weight:600; border-radius:9px; border:1px solid var(--border); background:var(--surface); color:var(--fg-muted); padding:7px 12px; cursor:pointer; display:flex; align-items:center; gap:5px; transition:transform .08s ease}
+.actbtn:hover{color:var(--fg); border-color:var(--fg-faint)}
+.actbtn:active{transform:scale(.96)}
+.actbtn.save[data-on="true"]{background:var(--accent); border-color:var(--accent); color:var(--accent-fg)}
+.actbtn.interested[data-on="true"]{background:var(--topic-a-bg); border-color:var(--topic-a); color:var(--topic-a)}
+.actbtn.notint[data-on="true"]{background:var(--warn-bg); border-color:var(--warn); color:var(--warn)}
+.actbtn.done[data-on="true"]{opacity:.45}
+.card[data-done="true"]{opacity:.5}
+.card[data-done="true"] .actions .actbtn:not(.done){pointer-events:none;opacity:.5}
+.unsure{margin-top:22px;border:1px dashed var(--border);border-radius:16px;background:var(--surface-2)}
+.unsure summary{list-style:none;cursor:pointer;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.unsure summary::-webkit-details-marker{display:none}
+.unsure summary .tag{font-size:.74rem;color:var(--fg-muted);font-weight:500}
+.unsure-body{padding:0 20px 18px;display:flex;flex-direction:column;gap:10px}
+.unsure-item{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px;flex-wrap:wrap}
+.unsure-item .txt{display:flex;flex-direction:column;gap:3px;min-width:0}
+.unsure-item .txt .h{font-weight:600;font-size:.92rem}
+.unsure-item .txt .r{font-size:.78rem;color:var(--fg-faint)}
+.unsure-item[data-resolved]{opacity:.5}
+.audit{margin-top:14px}
+.audit summary{list-style:none;cursor:pointer;font-size:.82rem;color:var(--fg-muted);font-weight:600;padding:8px 2px;display:flex;align-items:center;gap:6px}
+.audit summary::-webkit-details-marker{display:none}
+.audit summary::before{content:"▸";font-size:.7rem}
+.audit[open] summary::before{content:"▾"}
+.audittable{margin-top:8px;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface)}
+.auditrow{display:grid;grid-template-columns:72px 1fr 160px;gap:10px;padding:9px 14px;font-size:.78rem;border-top:1px solid var(--border)}
+.auditrow:first-child{border-top:0}
+.auditrow:nth-child(odd){background:var(--surface-2)}
+.auditrow .id{font-family:var(--font-mono);color:var(--fg-faint)}
+.auditrow .rule{font-weight:600}
+.auditrow .rule.flag{color:var(--danger)}
+.auditrow .rule.filter{color:var(--fg-muted)}
+.auditrow .note{color:var(--fg-faint);text-align:right}
+.foot{margin-top:26px;padding-top:16px;border-top:1px solid var(--border);font-size:.78rem;color:var(--fg-faint);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.toast{position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(12px); opacity:0; background:var(--fg); color:var(--bg); padding:10px 18px; border-radius:999px; font-size:.84rem; font-weight:600; transition:opacity .18s ease, transform .18s ease; pointer-events:none; z-index:30; white-space:nowrap}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+.sourcebtn{font:inherit; font-size:.8rem; font-weight:600; color:var(--accent); text-decoration:underline; text-underline-offset:2px}
+.headline-btn{all:unset; display:block; cursor:pointer; color:var(--fg)}
+.headline-btn:hover .headline{text-decoration:underline; text-decoration-color:var(--border)}
+.quicksum{display:none; margin-top:8px; padding:10px 12px; background:var(--surface-2); border-radius:10px; font-size:.86rem; color:var(--fg-muted); line-height:1.55}
+.quicksum.open{display:block}
+.quicksum .qs-label{font-size:.68rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--fg-faint); margin-bottom:4px}
+@media (max-width:480px){
+  .appbar{gap:10px}
+  .status h1{font-size:1.4rem}
+  .card{padding:16px}
+  .auditrow{grid-template-columns:56px 1fr}
+  .auditrow .note{text-align:left;grid-column:1 / -1}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="appbar">
+  <div class="brand"><span class="mark">F</span>Foldline</div>
+  <div class="spacer"></div>
+  <div class="runtoggle" role="tablist" aria-label="Choose run">
+    <button id="tab-run1" aria-pressed="true" onclick="setRun(1)">Run 1</button>
+    <button id="tab-run2" aria-pressed="false" onclick="setRun(2)">Run 2</button>
+  </div>
+  <div class="samplepill"><span class="dot"></span>Sample data &middot; Gmail not connected</div>
+</div>
+
+<div class="wrap">
+  <div class="status">
+    <div class="status-row">
+      <div>
+        <div class="eyebrow">Commute &middot; 15 min</div>
+        <h1 id="headline">Showing top 5 of 5 relevant</h1>
+      </div>
+      <div class="recon" id="recon"></div>
+    </div>
+    <div class="counts" id="counts"></div>
+  </div>
+
+  <div class="feed" id="feed"></div>
+
+  <details class="unsure" id="unsureWrap">
+    <summary><span id="unsureTitle">Unsure (2)</span><span class="tag">Safe items, relevance unclear &mdash; you decide</span></summary>
+    <div class="unsure-body" id="unsureBody"></div>
+  </details>
+
+  <details class="audit">
+    <summary>Audit log &mdash; every item that didn't become a card</summary>
+    <div class="audittable" id="auditTable"></div>
+  </details>
+
+  <div class="foot">
+    <span>seen_log updated after every action &middot; Gmail read-only, never written to</span>
+    <span id="footstate"></span>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const TOPICS = {A:'LLM evaluations', B:'PM career', C:'AI agents', D:'Product strategy'};
+
+const DATA = {
+  1: {
+    cards: [
+      {id:"R1", topic:"A", headline:"A small fixed evaluation set catches regressions between model updates.", why:"Lets you flag a worse model before it ships, not after.", tag:"Confirmed &middot; 2 sources", plus:1, score:null},
+      {id:"R4", topic:"A", headline:"Shadow evaluation finds failures before a model release.", why:"Runs the new model silently against the old one so failures surface pre-launch.", tag:"New way of use", plus:1, score:null},
+      {id:"R2", topic:"B", headline:"A PM career portfolio can show decisions and their trade-offs.", why:"Trade-off framing reads stronger in promo packets than a feature list.", tag:"Confirmed &middot; 2 sources", plus:1, score:null},
+      {id:"R3", topic:"C", headline:"An agent handoff checklist records when a human must take over.", why:"A concrete escalation pattern you can reuse in your own agent loop.", tag:"Confirmed &middot; 3 sources", plus:2, score:null},
+      {id:"P1", topic:"D", headline:"A product bet ledger connects assumptions to evidence.", why:"A lightweight way to track which bets were validated vs. just shipped.", tag:"New fact", plus:0, score:null}
+    ],
+    unsure: [
+      {id:"U1", headline:"Regulation may change AI product launch reviews.", reason:"Touches product strategy, but scope of the rule isn't final yet."},
+      {id:"U2", headline:"Regulation may affect evaluation reporting.", reason:"Overlaps LLM evaluations and policy &mdash; unclear which topic owns it."}
+    ],
+    audit: [
+      {id:"C1", rule:"filter", label:"Filtered &middot; listicle", note:"A listicle of quick growth hacks."},
+      {id:"C2", rule:"filter", label:"Filtered &middot; promotion", note:"A vendor promotion dressed as a listicle."},
+      {id:"I1", rule:"filter", label:"Filtered &middot; off-topic", note:"Gardening calendar unrelated to product."},
+      {id:"I2", rule:"filter", label:"Filtered &middot; off-topic", note:"General celebrity gadget roundup."},
+      {id:"X1", rule:"flag", label:"Flagged &middot; B1 financial", note:"content stored: none"},
+      {id:"X2", rule:"flag", label:"Flagged &middot; B2 unapproved sender", note:"content stored: none"},
+      {id:"X3", rule:"flag", label:"Flagged &middot; B3 hidden instructions", note:"content stored: none"},
+      {id:"NL1", rule:"filter", label:"Dropped &middot; no source link", note:"no card, nothing shown"}
+    ],
+    countsText: "20 processed",
+    chips: [["5","cards"],["5","merged"],["2","Unsure"],["3","flagged"],["4","filtered"],["1","dropped"]],
+    weights: {A:1.0, B:1.0, C:1.0, D:1.0}
+  },
+  2: {
+    cards: [
+      {id:"A1", topic:"A", headline:"A calibration rubric compares model evaluator judgments.", why:"Useful if you're scoring two LLM judges against each other.", tag:"New fact", plus:0, score:1.20, up:true},
+      {id:"A2", topic:"A", headline:"A regression dashboard separates model drift from prompt drift.", why:"Answers “did the model change or did I change the prompt” at a glance.", tag:"New fact", plus:0, score:1.20, up:true},
+      {id:"K1", topic:"C", headline:"Agent tools need an explicit handoff state.", why:"Control topic &mdash; ranks at neutral, unaffected by your feedback.", tag:"New fact", plus:0, score:1.00},
+      {id:"K2", topic:"C", headline:"Agent traces can show action provenance.", why:"Control topic &mdash; ranks at neutral, unaffected by your feedback.", tag:"New fact", plus:0, score:1.00},
+      {id:"B1", topic:"B", headline:"PM interviews benefit from decision narrative.", why:"Ranked lower after your feedback, but still shown &mdash; nothing is hidden.", tag:"New fact", plus:0, score:0.80, down:true},
+      {id:"B2", topic:"B", headline:"A career ladder can use observable product outcomes.", why:"Ranked lower after your feedback, but still shown &mdash; nothing is hidden.", tag:"New fact", plus:0, score:0.80, down:true}
+    ],
+    unsure: [],
+    audit: [
+      {id:"S1", rule:"filter", label:"Suppressed &middot; seen story", note:"matches R2, run 1"},
+      {id:"S2", rule:"filter", label:"Suppressed &middot; seen story", note:"matches R3, run 1"},
+      {id:"S3", rule:"filter", label:"Suppressed &middot; seen story", note:"matches R1, run 1"},
+      {id:"X4", rule:"flag", label:"Flagged &middot; B3 hidden instructions", note:"content stored: none"}
+    ],
+    countsText: "10 processed",
+    chips: [["6","cards"],["3","suppressed"],["1","flagged"]],
+    weights: {A:1.20, B:0.80, C:1.00, D:1.00}
+  }
+};
+
+/* Quick summaries (fictional sample content) */
+const SUMMARY = {
+  R1:"Teams that ship frequent model or prompt changes lose the ability to tell where a regression came from once they stop running the same fixed inputs through every version. A small, stable set of 15–30 hard cases turns that guesswork into a number you can diff release over release.",
+  R4:"Shadow evaluation runs a candidate model alongside the production model on recent traffic without serving its output, so failures on the long tail surface before launch, where they're cheap to fix.",
+  R2:"Promotion packets that list shipped features read like a job description. A few contested decisions — options considered, the call made, the trade-off — show judgment far better.",
+  R3:"An agent that takes real actions needs a designed point where it hands control back: named triggers, what gets logged, and who responds by when.",
+  P1:"A bet ledger records the assumption, the evidence that would confirm or kill it, and what actually showed up — written before the feature ships, not reconstructed after.",
+  A1:"A calibration rubric scores two LLM judges against a held-out labelled set, so their disagreements can be weighted by historical reliability rather than by whoever reviews last.",
+  A2:"Logging prompt version alongside model version on every run lets a dashboard separate prompt drift from model drift — and prompt edits are often the more frequent cause.",
+  K1:"Agents need a named 'control has passed to a human' state, distinct from 'waiting' or 'done', or they either act when they should escalate or sit idle.",
+  K2:"Recording which action ran, what triggered it and who approved it at each step turns an agent trace into something a teammate or auditor can reconstruct.",
+  B1:"Interview panels remember decision stories: the constraint, the trade-off, the outcome, and what you'd do differently — the part most candidates skip.",
+  B2:"Anchoring career levels to observable product outcomes, not scope or reporting lines, makes a ladder harder to game and easier to verify."
+};
+
+let state = {run:1, done:{}, saved:{}, interested:{}, notint:{}, unsureResolved:{}, summaryOpen:{}};
+try { const s = JSON.parse(localStorage.getItem('foldline-demo')||'null'); if (s) state = {...state, ...s}; } catch(e) {}
+function persist(){ try { localStorage.setItem('foldline-demo', JSON.stringify(state)); } catch(e) {} }
+
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(window.__toastT);
+  window.__toastT = setTimeout(()=>t.classList.remove('show'), 1600);
+}
+
+function setRun(n){ state.run = n; persist(); render(); }
+
+function scoreBadge(c){
+  if (c.score == null) return '';
+  const cls = c.up ? 'up' : c.down ? 'down' : '';
+  return `<span class="score ${cls}">score ${c.score.toFixed(2)} &middot; neutral 1.00</span>`;
+}
+
+function cardHTML(c){
+  const k = state.run + ':' + c.id;
+  const done = !!state.done[k], saved = !!state.saved[k];
+  const interested = !!state.interested[k], notint = !!state.notint[k];
+  const sumOpen = !!state.summaryOpen[k];
+  return `<div class="card" data-done="${done}">
+    <div class="card-top">
+      <span class="topic-pill ${c.topic}">${TOPICS[c.topic]}</span>
+      <span class="whatsnew">${c.tag}</span>
+    </div>
+    <button class="headline-btn" aria-expanded="${sumOpen}" onclick="toggleSummary('${k}')">
+      <div class="headline">${c.headline}</div>
+    </button>
+    <div class="why">${c.why}</div>
+    <div class="quicksum ${sumOpen ? 'open' : ''}">
+      <div class="qs-label">Quick summary</div>${SUMMARY[c.id] || c.why}
+    </div>
+    <div class="card-foot">
+      <div class="sources"><a class="sourcebtn" href="https://example.com/foldline-sample/${c.id.toLowerCase()}" target="_blank" rel="noopener noreferrer">Read source &rarr;</a>
+        &middot; Jun ${state.run === 1 ? '2' : '3'}
+        ${c.plus ? `&middot; <span class="plusn">+${c.plus} source${c.plus > 1 ? 's' : ''}</span>` : ''}
+        ${scoreBadge(c)}</div>
+      <div class="actions">
+        <button class="actbtn done" data-on="${done}" onclick="toggleDone('${k}')">${done ? 'Done ✓' : 'Done'}</button>
+        <button class="actbtn save" data-on="${saved}" onclick="toggleSave('${k}')">${saved ? 'Saved ✓' : 'Save'}</button>
+        <button class="actbtn interested" data-on="${interested}" onclick="toggleInterested('${k}',true)">Interested</button>
+        <button class="actbtn notint" data-on="${notint}" onclick="toggleInterested('${k}',false)">Not interested</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function toggleSummary(k){ state.summaryOpen[k] = !state.summaryOpen[k]; persist(); render(); }
+function toggleDone(k){ state.done[k] = !state.done[k]; persist(); render(); toast(state.done[k] ? 'Dismissed' : 'Restored to briefing'); }
+function toggleSave(k){ state.saved[k] = !state.saved[k]; persist(); render(); toast(state.saved[k] ? 'Saved to your history' : 'Removed from saved'); }
+function toggleInterested(k, pos){
+  if (pos) { state.interested[k] = !state.interested[k]; if (state.interested[k]) state.notint[k] = false; }
+  else { state.notint[k] = !state.notint[k]; if (state.notint[k]) state.interested[k] = false; }
+  persist(); render();
+  toast(pos ? (state.interested[k] ? 'Marked Interested — topic ranks higher next run' : 'Cleared')
+            : (state.notint[k] ? 'Marked Not interested — topic ranks lower, never hidden' : 'Cleared'));
+}
+
+function unsureHTML(u){
+  const k = state.run + ':' + u.id;
+  const r = state.unsureResolved[k];
+  return `<div class="unsure-item" ${r ? 'data-resolved' : ''}>
+    <div class="txt"><div class="h">${u.headline}</div>
+      <div class="r">${r === 'card' ? 'Added from Unsure' : r === 'rejected' ? 'Logged: unsure, rejected by you' : u.reason}</div></div>
+    ${r ? '' : `<div class="actions">
+      <button class="actbtn" onclick="resolveUnsure('${k}','card')">Show as card</button>
+      <button class="actbtn" onclick="resolveUnsure('${k}','rejected')">Not relevant</button>
+    </div>`}
+  </div>`;
+}
+function resolveUnsure(k, how){ state.unsureResolved[k] = how; persist(); render(); toast(how === 'card' ? 'Added to briefing' : 'Logged as not relevant'); }
+
+function auditRowHTML(a){
+  return `<div class="auditrow"><span class="id">${a.id}</span>
+    <span class="rule ${a.rule === 'flag' ? 'flag' : 'filter'}">${a.label}</span>
+    <span class="note">${a.note}</span></div>`;
+}
+
+function render(){
+  const d = DATA[state.run];
+  document.getElementById('feed').innerHTML = d.cards.map(cardHTML).join('');
+  document.getElementById('headline').textContent = `Showing top ${d.cards.length} of ${d.cards.length} relevant`;
+  document.getElementById('recon').innerHTML = `<b>${d.countsText}</b> &nbsp;=&nbsp; ` + d.chips.map(c => c[0] + ' ' + c[1]).join(' + ');
+  document.getElementById('counts').innerHTML = d.chips.map(c => `<span class="chip"><b>${c[0]}</b>${c[1]}</span>`).join('');
+  const uw = document.getElementById('unsureWrap');
+  if (!d.unsure.length) uw.style.display = 'none';
+  else {
+    uw.style.display = '';
+    document.getElementById('unsureTitle').textContent = `Unsure (${d.unsure.length})`;
+    document.getElementById('unsureBody').innerHTML = d.unsure.map(unsureHTML).join('');
+  }
+  document.getElementById('auditTable').innerHTML = d.audit.map(auditRowHTML).join('');
+  const w = d.weights;
+  document.getElementById('footstate').textContent = `interest weights · A ${w.A.toFixed(1)} · B ${w.B.toFixed(1)} · C ${w.C.toFixed(1)} · D ${w.D.toFixed(1)}`;
+  document.getElementById('tab-run1').setAttribute('aria-pressed', state.run === 1);
+  document.getElementById('tab-run2').setAttribute('aria-pressed', state.run === 2);
+}
+render();
+</script>
+</body>
+</html>
