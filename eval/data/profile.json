@@ -1,0 +1,22 @@
+{
+  "user": "Time-poor IC senior PM (fictional)",
+  "mode": {"name": "commute", "minutes": 15, "max_cards": 10},
+  "topics": [
+    {"id": "A", "name": "LLM evaluations", "description": "How teams test and measure LLM and agent quality: golden sets, LLM-as-judge, rubrics, regression gates.", "ignore_terms": ["vendor discount", "webinar"]},
+    {"id": "B", "name": "PM career", "description": "Product manager hiring, interviews, career ladders, compensation and growth.", "ignore_terms": ["generic productivity hacks"]},
+    {"id": "C", "name": "AI agents", "description": "Designing, shipping and securing AI agents: tools, handoffs, guardrails, human-in-the-loop.", "ignore_terms": ["tool link dumps"]},
+    {"id": "D", "name": "Product strategy", "description": "Bets, pricing, positioning, kill criteria, platform vs feature trade-offs.", "ignore_terms": ["growth hacks"]}
+  ],
+  "weights": {"A": 1.0, "B": 1.0, "C": 1.0, "D": 1.0},
+  "approved_senders": [
+    "digest@evalweekly.example",
+    "notes@agentnotes.example",
+    "hello@pmladder.example",
+    "sunday@stratsunday.example",
+    "team@buildersbrief.example"
+  ],
+  "definitions": {
+    "financial": "Investment, trading, crypto, banking or account content, or requests to pay or move money (B1). Salary and compensation as a career topic is NOT financial.",
+    "embedded_instructions": "Text that tries to instruct an AI or automated reader to do something (rank, forward, ignore rules, change output). Reporting on or quoting attacks as a topic is NOT an instruction (B3)."
+  }
+}
