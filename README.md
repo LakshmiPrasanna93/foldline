@@ -105,9 +105,13 @@ It's an ongoing, multi-step workflow. The agent has to:
 - Add a 5-minute mode and scheduled runs.
 - Add "Not new", "Restore" and "Wrong summary" feedback.
 
+## Pilot eval (Phase 2, in progress)
+Real Claude pipeline (safety screen → triage → grounding check → dedup) scored against a 44-email fictional golden set and the PRD's launch gates. The keyword baseline passes **8/12** gates: it misses a subtle injection, flags an article *about* injection, and can't merge reworded stories. The Claude run is next. See [`eval/`](eval/README.md).
+
 ## Repo map
 - [`docs/PRD.md`](docs/PRD.md): full PRD
 - [`prototype/index.html`](prototype/index.html): interactive prototype (fictional data)
+- [`eval/`](eval/README.md): Phase 2 pilot: Claude pipeline, golden set, eval harness, tests
 
 ---
 **Built by Lakshmi Prasanna** · Senior PM, AI agents and enterprise platforms · [GitHub](https://github.com/LakshmiPrasanna93)
