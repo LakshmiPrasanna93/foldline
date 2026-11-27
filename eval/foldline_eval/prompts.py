@@ -1,4 +1,4 @@
-"""Prompts and tool schemas for the Claude provider.
+"""Prompts and tool schemas for the LLM provider.
 
 Design choices (see eval/README.md):
 - Safety screen is a SEPARATE call that returns flags only. A flagged email is

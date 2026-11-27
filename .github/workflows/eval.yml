@@ -20,7 +20,7 @@ jobs:
         run: python -m pytest -q tests
       - name: Baseline eval
         run: python run_eval.py --provider baseline
-      - name: Claude eval (runs only when the ANTHROPIC_API_KEY secret is set)
+      - name: LLM eval (runs only when the ANTHROPIC_API_KEY secret is set)
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         if: env.ANTHROPIC_API_KEY != ''

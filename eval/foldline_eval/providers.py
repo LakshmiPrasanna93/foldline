@@ -2,7 +2,7 @@
 
 - BaselineProvider: keyword rules (what the Phase 1 prototype approximates).
   Runs with no API key, so the harness always works end to end.
-- ClaudeProvider: real Claude calls with forced-tool JSON output.
+- ClaudeProvider: real LLM calls with forced-tool JSON output.
 
 Interface: screen(email) -> dict, triage(email, feedback=None) -> dict,
 group_stories(cards) -> list[list[str]], plus a `usage` record.
@@ -120,7 +120,7 @@ def _jaccard(a: set, b: set) -> float:
     return len(a & b) / len(a | b) if a | b else 0.0
 
 
-# ---------------------------------------------------------------- Claude
+# ---------------------------------------------------------------- LLM
 
 class ClaudeProvider:
     name = "claude"

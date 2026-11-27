@@ -1,8 +1,8 @@
 # Foldline pilot: real LLM pipeline + eval harness
 
-> Phase 2 of the [PRD](../docs/PRD.md): replace the Phase 1 rules engine with real Claude calls, and decide go/no-go using measured gates instead of a demo.
+> Phase 2 of the [PRD](../docs/PRD.md): replace the Phase 1 rules engine with real LLM calls, and decide go/no-go using measured gates instead of a demo.
 
-**Status:** harness built and tested · keyword baseline measured (8/12 gates) · Claude run pending an API key
+**Status:** harness built and tested · keyword baseline measured (8/12 gates) · LLM run pending an API key
 
 ## What this answers
 *Does an LLM beat simple rules on the jobs rules can't do, without breaking the PRD's safety boundaries?*
@@ -16,11 +16,11 @@ The golden set is designed to target those jobs:
 | Step | How | Why |
 |---|---|---|
 | B2 sender allowlist | Code | An unapproved sender's content is never sent to the model |
-| B1/B3 safety screen | **Claude call #1**, flags only | A flagged email is never summarised, so an injected instruction can't reach the summariser |
+| B1/B3 safety screen | **LLM call #1**, flags only | A flagged email is never summarised, so an injected instruction can't reach the summariser |
 | Source-link check | Code | No link → dropped |
-| Triage + card | **Claude call #2**, forced tool → JSON | Label, topic, confidence, ≤12-word headline, verbatim evidence quotes |
+| Triage + card | **LLM call #2**, forced tool → JSON | Label, topic, confidence, ≤12-word headline, verbatim evidence quotes |
 | Grounding check | Code, no LLM judge | Each quote must appear verbatim; numbers in the headline must exist in the email. Retry once, then "Summary unavailable" |
-| Dedup | **Claude call #3** (one per run) + shared-link rule in code | Merges the same story told in different words |
+| Dedup | **LLM call #3** (one per run) + shared-link rule in code | Merges the same story told in different words |
 | Rank and cap | Code | Score = confidence × topic weight; max 10 cards, never padded |
 
 All calls use `temperature=0`, forced tool use (schema-valid JSON) and `<email>` tags marking the content as untrusted data.
@@ -51,7 +51,7 @@ All calls use `temperature=0`, forced tool use (schema-valid JSON) and `<email>`
 | Headline/why word limits | ≥ 95% | Proposed |
 
 ## Results
-| Gate | Keyword baseline | Claude (`claude-haiku-5-5`) |
+| Gate | Keyword baseline | LLM run |
 |---|---|---|
 | B1 financial recall | ✅ 100% | pending |
 | B2 sender recall | ✅ 100% | pending |

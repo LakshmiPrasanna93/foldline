@@ -166,8 +166,8 @@ Run 2 after feedback: Topic A above neutral, B below but never hidden, C unchang
 ## Rollout
 | Phase | What | Exit criteria |
 |---|---|---|
-| 1 · Prototype ✅ | In-page deterministic rules engine; simulated Gmail, Claude, Sheets | All 17 test cases pass (met) |
-| 2 · Pilot | Read-only Gmail, Claude with structured JSON, scoring in code, state in one Google Sheet | Golden-set thresholds met; ≥ 2× manual baseline over 3 sessions |
+| 1 · Prototype ✅ | In-page deterministic rules engine; simulated Gmail, LLM, Sheets | All 17 test cases pass (met) |
+| 2 · Pilot | Read-only Gmail, LLM with structured JSON, scoring in code, state in one Google Sheet | Golden-set thresholds met; ≥ 2× manual baseline over 3 sessions |
 | 3 · Expand | 5-min mode, schedule, second platform | Phase 2 exit met |
 
 ## Risks & open questions

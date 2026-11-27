@@ -1,4 +1,4 @@
-"""Product-logic tests. No API key needed: Claude is replaced by a stub client."""
+"""Product-logic tests. No API key needed: the model client is replaced by a stub."""
 import json
 import sys
 from pathlib import Path

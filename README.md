@@ -2,11 +2,11 @@
 
 > **Role:** Product Manager (problem framing, PRD, agent design, evals, prototype)<br>
 > **Status:** Prototype complete · all 17 test cases pass · pilot designed<br>
-> **Stack:** Claude (structured JSON) · Gmail (read-only) · Google Sheets (state)
+> **Stack:** LLM (structured JSON) · Gmail (read-only) · Google Sheets (state)
 
 **▶ Try it live:** [lakshmiprasanna93.github.io/foldline/prototype](https://lakshmiprasanna93.github.io/foldline/prototype/) (runs in the browser on fictional sample data)
 
-> **Prototype, not production.** Gmail, Claude and Google Sheets are simulated by a rules engine. The 17 test cases validate the product logic and safety boundaries; LLM quality is measured in the pilot (section 7).
+> **Prototype, not production.** Gmail, the LLM and Google Sheets are simulated by a rules engine. The 17 test cases validate the product logic and safety boundaries; LLM quality is measured in the pilot (section 7).
 
 ## TL;DR
 - Senior PMs follow ~20 sources but have only 10–20 minutes of reading time.
@@ -90,8 +90,8 @@ It's an ongoing, multi-step workflow. The agent has to:
 ## 8. Rollout
 | Phase | Scope | Exit criteria |
 |---|---|---|
-| 1 · Prototype ✅ | Rules engine with simulated Gmail, Claude and Sheets | All 17 test cases pass (met) |
-| 2 · Pilot | Live read-only Gmail; Claude returns JSON; state in Google Sheets | Golden-set thresholds met; ≥ 2× baseline |
+| 1 · Prototype ✅ | Rules engine with simulated Gmail, LLM and Sheets | All 17 test cases pass (met) |
+| 2 · Pilot | Live read-only Gmail; the LLM returns JSON; state in Google Sheets | Golden-set thresholds met; ≥ 2× baseline |
 | 3 · Expand | 5-min mode, schedule, second source | Phase 2 exit met |
 
 ## 9. Risks and trade-offs
@@ -106,12 +106,12 @@ It's an ongoing, multi-step workflow. The agent has to:
 - Add "Not new", "Restore" and "Wrong summary" feedback.
 
 ## Pilot eval (Phase 2, in progress)
-Real Claude pipeline (safety screen → triage → grounding check → dedup) scored against a 44-email fictional golden set and the PRD's launch gates. The keyword baseline passes **8/12** gates: it misses a subtle injection, flags an article *about* injection, and can't merge reworded stories. The Claude run is next. See [`eval/`](eval/README.md).
+Real LLM pipeline (safety screen → triage → grounding check → dedup) scored against a 44-email fictional golden set and the PRD's launch gates. The keyword baseline passes **8/12** gates: it misses a subtle injection, flags an article *about* injection, and can't merge reworded stories. The LLM run is next. See [`eval/`](eval/README.md).
 
 ## Repo map
 - [`docs/PRD.md`](docs/PRD.md): full PRD
 - [`prototype/index.html`](prototype/index.html): interactive prototype (fictional data)
-- [`eval/`](eval/README.md): Phase 2 pilot: Claude pipeline, golden set, eval harness, tests
+- [`eval/`](eval/README.md): Phase 2 pilot: LLM pipeline, golden set, eval harness, tests
 
 ---
 **Built by Lakshmi Prasanna** · Senior PM, AI agents and enterprise platforms · [GitHub](https://github.com/LakshmiPrasanna93)
